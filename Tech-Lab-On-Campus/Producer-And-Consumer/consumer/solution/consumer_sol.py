@@ -23,13 +23,11 @@ class mqConsumer(mqConsumerInterface):
 
         # Create Queue if not already present
 
-        if not hasattr(self, "queue"):
-            self.queue = self.channel.queue_declare(queue=self.queue_name)
+        self.queue = self.channel.queue_declare(queue=self.queue_name)
 
         # Create the exchange if not already present
             
-        if not hasattr(self, "exchange"):
-            self.exchange = self.channel.exchange_declare(exchange=self.exchange_name, exchange_type="topic")
+        self.exchange = self.channel.exchange_declare(exchange=self.exchange_name, exchange_type="topic")
 
         # Bind Binding Key to Queue on the exchange
             
@@ -43,7 +41,7 @@ class mqConsumer(mqConsumerInterface):
 
         #note
         self.channel.basic_consume(
-            self.queue_name, 
+            self.queue_name,
             on_message_callback=self.on_message_callback,
             auto_ack=False
         )
