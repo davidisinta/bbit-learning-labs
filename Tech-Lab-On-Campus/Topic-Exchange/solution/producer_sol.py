@@ -26,19 +26,19 @@ class mqProducer(producer_interface.mqProducerInterface):
         self.channel = self.connection.channel()
 
         # Create the exchange if not already present
-        self.exchange_name = self.channel.exchange_declare(
-    exchange="Exchange Name", exchange_type="topic"
-)
-)
+        self.channel.exchange_declare(
+    exchange=self.exchange_name, exchange_type="topic"
+        )
+
 
 
 
     def publishOrder(self, message: str) -> None:
         # Basic Publish to Exchange
         self.channel.basic_publish(
-            exchange="Exchange Name",
-            routing_key="Routing Key",
-            body="Message",
+            exchange=self.exchange_name,
+            routing_key=self.routing_key,
+            body=message,
         )
 
         # Close Channel
