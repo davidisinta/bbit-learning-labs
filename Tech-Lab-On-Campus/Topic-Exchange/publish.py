@@ -31,7 +31,7 @@ def main(ticker: str, price: float, sector: str) -> None:
 
     # message,binding_key=create_message()
 
-    routingKey = f"Hi"
+    routingKey = str(sector)
 
     producer = mqProducer(routing_key=routingKey, exchange_name="Tech Lab Topic Exchange")
 
